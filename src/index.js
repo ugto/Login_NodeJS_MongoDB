@@ -14,6 +14,7 @@ app.set('port', process.env.PORT||3000);
 
 //Middlewares
 app.use(morgan('dev'));
+app.use(express.urlencoded({extended:false}));
 
 //Routes
 app.use('/', require('./routes/index'));
