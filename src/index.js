@@ -5,7 +5,8 @@ const morgan = require('morgan');
 
 //Initializations
 const app = express();
-require('./databse')
+require('./databse');
+require('./passport/local-auth');
 
 
 //settings
