@@ -2,6 +2,8 @@ const express = require('express');
 const engine = require('ejs-mate');
 const path = require('path');
 const morgan = require('morgan');
+const passport = require('passport');
+const session = require('express-session')
 
 //Initializations
 const app = express();
@@ -18,6 +20,13 @@ app.set('port', process.env.PORT||3000);
 //Middlewares
 app.use(morgan('dev'));
 app.use(express.urlencoded({extended:false}));
+app.use(session({
+    secret: 'MiFraseDeEncripcion',
+    resave: false,
+    saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 
 //Routes
 app.use('/', require('./routes/index'));

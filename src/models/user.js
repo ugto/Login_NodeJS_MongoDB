@@ -9,7 +9,7 @@ const userSchema = new Schema({
 });
 
 userSchema.methods.encryptPassword= (password)  =>{
-    return bcrypt.hashSync(password,bcrypt,bcrypt.genSaltSync(10));
+    return bcrypt.hashSync(password,bcrypt.genSaltSync(10));
 };
 
 userSchema.methods.comparePassword= (password)  =>{
