@@ -3,7 +3,9 @@ const engine = require('ejs-mate');
 const path = require('path');
 const morgan = require('morgan');
 
+//Initializations
 const app = express();
+require('./databse')
 
 
 //settings
