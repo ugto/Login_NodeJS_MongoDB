@@ -40,7 +40,7 @@ passport.use('local-signup', new LocalStrategy({
       return done(null, false, req.flash('signinMessage', 'Email no Encontrado'));
     }
     if(!user.comparePassword(password)) {
-      return done(null, false, req.flash('signinMessnsaje', 'Password Incorrecto'));
+      return done(null, false, req.flash('signinMessage', 'Password Incorrecto'));
     }
     done(null, user);
   
