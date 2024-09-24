@@ -47,7 +47,9 @@
             </div>
         <% } %>
         <% if(signinMessage.length>0) { %>
-            <div class="alert alert-danger"><%= signinMessage %></div>
+            <div class="alert alert-danger">
+              <%= signinMessage %>
+            </div>
         <% } %>
         
         <%- body %>
