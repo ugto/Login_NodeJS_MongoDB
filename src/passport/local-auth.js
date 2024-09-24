@@ -17,14 +17,31 @@ passport.use('local-signup', new LocalStrategy({
     passwordField: 'password',
     passReqToCallback: true
 },async(req, email, password, done)=>{
-    const user = User.findOne({email: email});
-    if(user){
-        return done(null,false, req.flash('signupMessage','El usuario actualmente ya está registrado'));
-    }else{
+    const user = await User.findOne({'email': email});
+  if(user) {
+    return done(null, false, req.flash('signupMessage', 'El email ya se encuentra registrado.'));
+  } else {
     const newUser = new User();
     newUser.email = email;
     newUser.password = newUser.encryptPassword(password);
     await newUser.save();
-    done(null,newUser);
+    done(null, newUser);
+  }  
+ }));
+
+ passport.use('local-signin', new LocalStrategy({
+    usernameField: 'email',
+    passwordField: 'password',
+    passReqToCallback: true
+  }, async (req, email, password, done) => {
+   
+    const user = await User.findOne({email: email});
+    if(!user) {
+      return done(null, false, req.flash('signinMensaje', 'Email no Encontrado'));
     }
-}));
+    if(!user.comparePassword(password)) {
+      return done(null, false, req.flash('signinMessnsaje', 'Password Incorrecto'));
+    }
+    done(null, user);
+  
+  }));
